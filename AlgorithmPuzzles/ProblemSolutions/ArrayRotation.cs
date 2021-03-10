@@ -26,7 +26,7 @@ namespace AlgorithmPuzzles.ProblemSolutions {
                     case < 0: {
                         var item = iList[^1];
 
-                        for (var i = iList.Count - 1; i > 0; ++i) {
+                        for (var i = iList.Count - 1; i > 0; --i) {
                             iList[i] = iList[i - 1];
                         }
 
