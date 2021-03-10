@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using NrgteUnit;
 using NrgteUnit.Assert;
 
 namespace AlgorithmPuzzles.ProblemSolutions {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public class ArrayPairSum : ISolution {
-        public string GetName() {
-            return "Array Pair Sum";
-        }
-
         private static bool NaivePairSum(int[] arr, int sum) {
             for (var i = 0; i < arr.Length - 1; ++i) {
                 for (var j = i; j < arr.Length; ++j) {

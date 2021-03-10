@@ -11,9 +11,13 @@ namespace AlgorithmPuzzles {
                 .Where(p => type.IsAssignableFrom(p) && p != type)
                 .ToArray();
 
-            var results = TestRunner.RunTestClasses(solutions);
-            foreach (var failure in results) {
-                Console.WriteLine(failure);
+            foreach (var solutionType in solutions) {
+                Console.WriteLine($"Testing class: {solutionType.Name}");
+
+                var results = TestRunner.RunTestClasses(solutionType);
+                foreach (var failure in results) {
+                    Console.WriteLine(failure);
+                }
             }
         }
     }

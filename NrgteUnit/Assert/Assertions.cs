@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NrgteUnit.Assert {
     /// <summary>
@@ -28,6 +31,20 @@ namespace NrgteUnit.Assert {
         /// <exception cref="AssertionException">Throws if objects are not equal.</exception>
         public static void AssertEquals(object expected, object actual) {
             if (expected.Equals(actual) || expected == actual) return;
+
+            Console.WriteLine($"Expected: {expected}{Environment.NewLine}  Actual: {actual}");
+            throw new AssertionException();
+        }
+
+        /// <summary>
+        /// Asserts if two sequences are equal.
+        /// </summary>
+        /// <param name="expected">Expected sequence.</param>
+        /// <param name="actual">Actual sequence.</param>
+        /// <typeparam name="T">Type in sequence.</typeparam>
+        /// <exception cref="AssertionException">Throws if sequences are not equal.</exception>
+        public static void AssertEnumerableEquals<T>(IEnumerable<T> expected, IEnumerable<T> actual) {
+            if (expected.SequenceEqual(actual)) return;
 
             Console.WriteLine($"Expected: {expected}{Environment.NewLine}  Actual: {actual}");
             throw new AssertionException();
