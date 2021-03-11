@@ -109,8 +109,47 @@ namespace AlgorithmPuzzles.ProblemSolutions {
         /// </summary>
         /// <param name="n">Number.</param>
         /// <returns>A power of two that denotes where the rightmost bit is.</returns>
-        public static int GetPositionOfRightmostBit(int n) {
+        private static int GetPositionOfRightmostBit(int n) {
             return n ^ UnsetRightmostBit(n);
+        }
+
+        /// <summary>
+        /// Turn an uppercase ASCII letter into a lowercase ASCII letter.
+        /// Pre: all inputs are letters.
+        /// </summary>
+        /// <param name="c">Letter to convert.</param>
+        /// <returns>Lowercase letter.</returns>
+        private static char ToLowercase(char c) {
+            return (char) (c | ' ');
+        }
+
+        /// <summary>
+        /// Turn a lowercase ASCII letter into an uppercase ASCII letter.
+        /// Pre: all inputs are letters.
+        /// </summary>
+        /// <param name="c">Letter to convert.</param>
+        /// <returns>Uppercase letter.</returns>
+        private static char ToUppercase(char c) {
+            return (char) (c & '_');
+        }
+
+        /// <summary>
+        /// Invert the case of an ASCII letter.
+        /// Pre: all inputs are letters.
+        /// </summary>
+        /// <param name="c">Letter to convert.</param>
+        /// <returns>Letter with the opposite case.</returns>
+        private static char InvertCase(char c) {
+            return (char) (c ^ ' ');
+        }
+
+        /// <summary>
+        /// Find the position of the ASCII letter in the alphabet, regardless of case.
+        /// </summary>
+        /// <param name="c">Letter to query.</param>
+        /// <returns>Position in alphabet (1-indexed).</returns>
+        private static int FindPositionInAlphabet(char c) {
+            return c & 31;
         }
 
         [Test]
@@ -229,6 +268,45 @@ namespace AlgorithmPuzzles.ProblemSolutions {
             Assertions.AssertEquals(0, GetPositionOfRightmostBit(n2));
             Assertions.AssertEquals(0b100, GetPositionOfRightmostBit(n3));
             Assertions.AssertEquals(0b1000, GetPositionOfRightmostBit(n4));
+        }
+
+        [Test]
+        public void TestToLowercase() {
+            Assertions.AssertEquals('x', ToLowercase('X'));
+            Assertions.AssertEquals('k', ToLowercase('K'));
+            Assertions.AssertEquals('c', ToLowercase('C'));
+            Assertions.AssertEquals('d', ToLowercase('D'));
+        }
+
+        [Test]
+        public void TestToUppercase() {
+            Assertions.AssertEquals('X', ToUppercase('x'));
+            Assertions.AssertEquals('K', ToUppercase('k'));
+            Assertions.AssertEquals('C', ToUppercase('c'));
+            Assertions.AssertEquals('D', ToUppercase('d'));
+        }
+
+        [Test]
+        public void TestInvertCase() {
+            Assertions.AssertEquals('X', InvertCase('x'));
+            Assertions.AssertEquals('k', InvertCase('K'));
+            Assertions.AssertEquals('C', InvertCase('c'));
+            Assertions.AssertEquals('d', InvertCase('D'));
+        }
+
+        [Test]
+        public void TestFindPositionInAlphabet() {
+            Assertions.AssertEquals(26, FindPositionInAlphabet('z'));
+            Assertions.AssertEquals(26, FindPositionInAlphabet('Z'));
+
+            Assertions.AssertEquals(1, FindPositionInAlphabet('a'));
+            Assertions.AssertEquals(1, FindPositionInAlphabet('A'));
+
+            Assertions.AssertEquals(5, FindPositionInAlphabet('e'));
+            Assertions.AssertEquals(5, FindPositionInAlphabet('E'));
+
+            Assertions.AssertEquals(10, FindPositionInAlphabet('j'));
+            Assertions.AssertEquals(10, FindPositionInAlphabet('J'));
         }
     }
 }
