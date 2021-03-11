@@ -37,6 +37,19 @@ namespace NrgteUnit.Assert {
         }
 
         /// <summary>
+        /// Asserts if two objects are equal. Checks both overridden and referential equality.
+        /// </summary>
+        /// <param name="expected">Expected object.</param>
+        /// <param name="actual">Actual object.</param>
+        /// <exception cref="AssertionException">Throws if objects are not equal.</exception>
+        public static void AssertEquals(ValueType expected, ValueType actual) {
+            if (expected.Equals(actual)) return;
+
+            Console.WriteLine($"Expected: {expected}{Environment.NewLine}  Actual: {actual}");
+            throw new AssertionException();
+        }
+
+        /// <summary>
         /// Asserts if two sequences are equal.
         /// </summary>
         /// <param name="expected">Expected sequence.</param>
